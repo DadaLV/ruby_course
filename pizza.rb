@@ -74,31 +74,32 @@
 
 # puts Pizza.failInstance
 
-class Pizza
-  @@count = 0
-  attr_writer :ingredients
-  attr_reader :d
+# class Pizza
+#   @@count = 0
+#   attr_writer :ingredients
+#   attr_reader :d
   
-  def initialize(d, ingredients=[])
-      @@count += 1
-      @number = @@count
-      @d = d
-      @ingredients = ingredients
-  end
+#   def initialize(d, ingredients=[])
+#       @@count += 1
+#       @number = @@count
+#       @d = d
+#       @ingredients = ingredients
+#   end
   
-  def ingredients=(val)
-    @ingredients = val
-  end
+#   def ingredients=(val)
+#     @ingredients = val
+#   end
     
- def d
- @d = d
- end
+#  def d
+#  @d = d
+#  end
 
-  def description
-      "Піца № #{@number} (діагональ = #{@d}) містить [#{@ingredients.join(",")}]."
-  end
-end
+#   def description
+#       "Піца № #{@number} (діагональ = #{@d}) містить [#{@ingredients.join(",")}]."
+#   end
+# end
 
-pizza1 = Pizza.new(24)
-pizza1.ingredients = ["mushroom"]
-puts  pizza1.d = 2
+# pizza1 = Pizza.new(24)
+# pizza1.ingredients = ["mushroom"]
+# puts  pizza1.d = 2
+
