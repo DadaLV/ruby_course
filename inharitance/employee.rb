@@ -48,7 +48,7 @@ end
 class HourlyEmployee < Employee
   def month_salary(hours)
     before = rate * hours
-    before – tax(before)
+    before - tax(before)
   end
 end
 
@@ -58,5 +58,5 @@ empl1.rate = 10_000
 puts empl1.month_salary(1)
 
 empl2 = HourlyEmployee.new('Oleksandr', 'Novak', 'manager')
-empl2.rate = 10_000
+empl2.rate = 10_500
 puts empl2.month_salary(1)
