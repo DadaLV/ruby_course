@@ -10,3 +10,39 @@
 # Наприклад,
 
 # symbol  => висвічується запрошення  Enter any letters, користувач вводить рядок abc; метод symbol повертає :abc.
+
+module ConsoleInput
+  def string
+    puts "Enter any string"
+    string = gets
+    return string
+  end
+  
+  def number
+    puts "Enter any number"
+    number = gets
+    if number.include?"."
+    return number.to_f
+    else return number.to_i
+    end
+  end
+
+  def hash
+    puts "Enter hash in format 'key: value' or 'key => value'"
+    hash = gets
+    if hash.include?":"
+      result = hash.split(": ")
+      else
+      result = hash.split(" => ")
+    end
+      return {"#{result[0]}" =>"#{result[1]}"}    
+  end
+
+  def symbol
+    puts "Enter any letters"
+    symbol = gets
+    print ":#{symbol.chomp}" 
+  end
+
+end
+
