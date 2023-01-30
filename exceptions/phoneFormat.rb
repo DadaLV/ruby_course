@@ -14,14 +14,14 @@
 # user.phone = '80678765567' - буде генерувати виключення з повідомленням Phone number 80678765567 incorrect. You should enter phone in format +38dddddddddd
 
 class PhoneFormatException < StandardError
-  def initialize
-    @number = number
-    puts "Phone number #{@number} is incorrect. You should enter phone in format +38dddddddddd"
+  def initialize(phone=false)
+    @phone = phone
+    puts "Phone number #{@phone} is incorrect. You should enter phone in format +38dddddddddd"
   end
 end
 
 module Validation
-  def phone_valid?
+  def phone_valid?(phone)
     regular = /(?:\+?|\b)[0-9]{10}\b/
     phone == regular ? true : false
   end
@@ -32,13 +32,18 @@ class User
   attr_reader :name
   attr_writer :phone
 
+  # def initialize
+  #   @name = name
+  #   @phone = phone
+  # end
+
   include Validation
 
-  def phone= (phone)
-    raise PhoneFormatException, phone unless phone_valid?(phone)
+  def self.phone(phone)
+    raise PhoneFormatException phone unless phone_valid?(phone)
     @phone = phone
     rescue PhoneFormatException
-      puts $!.message
+      puts "#{$!.message}"
   end
 
 
