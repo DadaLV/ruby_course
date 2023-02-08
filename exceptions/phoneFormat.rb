@@ -52,3 +52,108 @@ end
 
 user = User.new('Name')
 user.phone = '80678765567'
+
+class PhoneFormatException < StandardError
+  def initialize
+    @number = number
+    "Phone number #{@number} is incorrect. You should enter phone in format +38dddddddddd."
+  end
+  
+end
+
+
+
+module Validation
+  def phone_valid?(phone)
+    regular = /(?:\+?|\b)[0-9]{10}\b/
+    phone == regular ? true : false
+  end
+
+end
+
+class User
+  attr_reader :name
+  attr_writer :phone
+
+  include Validation
+
+  def phone= (phone)
+    raise PhoneFormatException, @phone unless phone_valid?(phone)
+    @phone = phone
+    rescue PhoneFormatException
+      puts $!.message
+  end
+
+
+  
+end
+
+
+class PhoneFormatException < StandardError
+  attr_reader :incorrect_number
+
+  def initialize(incorrect_number)
+    @incorrect_number = incorrect_number
+    message = "Phone number #{incorrect_number} is incorrect. You should enter phone in format +38dddddddddd"
+    super(message)
+  end
+end
+
+module Validation
+  def self.phone_valid?(phone)
+    phone =~ /\A\+38\d{10}\z/ ? true : false
+  end
+end
+
+class User
+  attr_reader :name
+  attr_accessor :phone
+
+  def initialize(name)
+    @name = name
+  end
+
+  def phone=(phone)
+    if Validation.phone_valid?(phone)
+      @phone = phone
+    else
+      raise PhoneFormatException, phone
+    end
+  end
+end
+
+
+class PhoneFormatException < StandardError
+  attr_accessor :phone_number
+
+  def initialize(phone_number)
+    @phone_number = phone_number
+    message = "Phone number #{phone_number} is incorrect. You should enter phone in format +38dddddddddd"
+    super(message)
+  end
+end
+
+module Validation
+  def self.phone_valid?(phone)
+    /\A\+38\d{10}\z/.match?(phone)
+  end
+  
+end
+
+class User
+  attr_reader :name
+  attr_writer :phone
+
+ include Validation
+
+  def initialize(name)
+    @name = name
+  end
+
+   def phone=(phone)
+    raise PhoneFormatException.new(phone) unless Validation.phone_valid?(phone)
+    @phone = phone
+  end
+end
+
+

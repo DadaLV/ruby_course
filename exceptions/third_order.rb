@@ -28,7 +28,44 @@ def third_order(number)
 
 end 
 
+def third_order(limit)
+   tries = 0
+   while tries < 3
+     number = rand(1..limit)
+     puts "What will be the result of raising #{number} to the 3rd power?"
+     answer = gets.chomp.to_i
+     if answer == number ** 3
+       puts "Good job!"
+       break
+     else
+       tries += 1
+       puts "Try again. You have #{3 - tries} tries left."
+     end
+   end
+   puts "Try next time." if tries == 3
+ end
+ 
+
 
 
 
 # third_order(1)
+
+def third_order(number)
+   count = 0
+   begin
+     number = rand(1..number)
+     puts "What is result #{number} * #{number} * #{number}?"
+     answer = gets.chomp.to_i
+     puts "Good job" if answer == number ** 3
+       
+       
+     count += 1
+   rescue
+     retry
+   end
+ 
+   puts "Try next time" if count == 3
+ end
+
+ 
